@@ -1,0 +1,28 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.container {
+  height: calc(100vh - 64px);
+}
+
+@media screen and (max-width: 598px) {
+  .container {
+    height: calc(100vh - 56px);
+  }
+}
+
+.sidenav {
+  background-color: #414450;
+  width: 200px;
+}
+
+.sidenav-content {
+  display: flex;
+  padding-top: 20px;
+  justify-content: center;
+}
+
+.sidenav-content > div {
+  height: 100%;
+}
