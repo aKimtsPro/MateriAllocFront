@@ -10,10 +10,13 @@
     <app-nav-item *ngFor="let item of navItems" [item]="item"></app-nav-item>
   </mat-drawer>
 
+  <mat-drawer #actionDrawer class="sideaction" mode="push" position="end">
+    <action-drawer [drawer]="actionDrawer"></action-drawer>
+  </mat-drawer>
+
   <div class="sidenav-content">
     <div>
       <router-outlet></router-outlet>
     </div>
   </div>
-
 </mat-drawer-container>
