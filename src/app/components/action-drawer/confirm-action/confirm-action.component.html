@@ -1,0 +1,13 @@
+<h3>Action: {{action}}</h3>
+
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label>Justification</mat-label>
+    <input matInput [(ngModel)]="justification">
+  </mat-form-field>
+</div>
+
+<div class="action-btn-rack row-btn">
+  <button mat-flat-button class="accept" [disabled]="!receiverInput.valid" (click)="confirm()">accept</button>
+  <button mat-flat-button color="warn" (click)="drawer.close()">close</button>
+</div>

@@ -1,0 +1,109 @@
+<h2>Create request</h2>
+
+<mat-card *ngIf="error" class="error-card">
+  <mat-card-content>{{error | json}}</mat-card-content>
+</mat-card>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>User Login</mat-label>
+      <input matInput formControlName="userLogin" placeholder="Enter user login">
+      <mat-error *ngIf="form.controls['userLogin'].hasError('required')">User login is required</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Justification</mat-label>
+      <textarea matInput formControlName="justification" placeholder="Enter justification"></textarea>
+      <mat-error *ngIf="form.controls['justification'].hasError('required')">Justification is required</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Needed Capacity</mat-label>
+      <input matInput formControlName="neededCapacity" placeholder="Enter needed capacity">
+      <mat-error *ngIf="form.controls['neededCapacity'].hasError('required')">Needed capacity is required</mat-error>
+      <mat-error *ngIf="form.controls['neededCapacity'].hasError('min')">Needed capacity must be at least 5</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="add-select-card" *ngIf="materials">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Materials</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div>
+          <mat-list>
+            <mat-divider></mat-divider>
+            <div *ngFor="let id of form.get('materialIds')?.value; let i=index">
+                <mat-list-item>
+                  <div class="space-end">
+                    <div class="material-name">
+                      {{getMaterial(id)?.name}}
+                    </div>
+                    <div>
+                      <button mat-flat-button color="accent" type="button" (click)="removeMaterial(i)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+            </div>
+          </mat-list>
+        </div>
+        <div class="add-select">
+          <div class="add-select-input">
+            <mat-form-field appearance="fill">
+              <mat-label>Select</mat-label>
+              <mat-select #select>
+                <ng-container *ngFor="let mat of materials">
+                  <mat-option value="one" *ngIf="isSelected(mat)" [value]="mat">{{mat.name}}</mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="add-select-btn">
+            <button mat-button color="primary" type="button" (click)="addMaterial(select.value)">Add Material</button>
+          </div>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Enter date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="form.controls['date'].hasError('daysInFuture')">Date must be at least 3 days in the future</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+      <div class="mat-form-field-flex ng-tns-c103-2">
+        <ngx-timepicker-field [format]="24" [defaultTime]="'23:11'"></ngx-timepicker-field>
+      </div>
+
+  </div>
+
+
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Additional Notes</mat-label>
+      <textarea matInput formControlName="additionalNotes" placeholder="Enter additional notes"></textarea>
+    </mat-form-field>
+  </div>
+
+
+
+  <button mat-raised-button color="primary" type="submit">Submit</button>
+
+</form>

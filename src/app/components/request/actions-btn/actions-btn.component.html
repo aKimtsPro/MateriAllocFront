@@ -1,0 +1,8 @@
+<div>
+
+  <button mat-button color="primary" class="row-btn"
+          *ngFor="let act of actions[request.currentStatus]; let i = index"
+          (click)="act.action()"
+  >{{ act.label }}</button>
+
+</div>

@@ -1,0 +1,83 @@
+<div>
+  <mat-accordion>
+    <mat-expansion-panel hideToggle *ngFor="let room of compatibleRooms" [ngClass]="{ selected: selectedRoom === room }">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <span>room number:</span> {{ room.number }}
+        </mat-panel-title>
+        <mat-panel-description>
+        <span class="field-container">
+          <span>materials:</span> {{ room.materials.length }}
+        </span>
+          <span class="field-container">
+          <span>capacity:</span> {{ room.capacity }}
+        </span>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div>
+        <mat-list>
+          <mat-list-item>
+            <div class="field-display">
+              <div>
+                <p>id</p>
+              </div>
+              <div>
+                <p>{{room.id}}</p>
+              </div>
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div class="field-display">
+              <div>
+                <p>tools:</p>
+              </div>
+              <div id="material-field">
+                <p>{{room.materials.length}} materials</p>
+                <app-materials-menu
+                  [disabled]="room.materials.length === 0"
+                  [materials]="room.materials"
+                ></app-materials-menu>
+              </div>
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div class="field-display">
+              <div>
+                <p>capacity</p>
+              </div>
+              <div>
+                <p>{{room.capacity}}</p>
+              </div>
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <div class="field-display">
+              <div>
+                <p>student access</p>
+              </div>
+              <div>
+                <p>{{room.studentAccess}}</p>
+              </div>
+            </div>
+          </mat-list-item>
+        </mat-list>
+        <div>
+          <button mat-raised-button [color]="selectedRoom === room ? 'primary' : 'accent'" class="select-btn" (click)="toggleSelection(room)">{{ selectedRoom === room ? 'unselect' : 'select' }}</button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<div class="action-btn-rack row-btn">
+  <button mat-flat-button class="accept" [disabled]="selectedRoom === undefined" (click)="accept()">accept</button>
+  <button mat-flat-button color="warn" (click)="drawer.close()">close</button>
+</div>
+
+
+
+

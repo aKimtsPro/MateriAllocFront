@@ -1,0 +1,4 @@
+.action-container{
+  height: calc(100% - 36px);
+  overflow-y: hidden;
+}

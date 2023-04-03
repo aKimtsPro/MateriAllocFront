@@ -1,0 +1,85 @@
+<div>
+  <div>
+    <div class="page-actions">
+      <div>
+        <button mat-flat-button color="accent" routerLink="/request/create">nouvelle requête</button>
+      </div>
+
+      <div>
+        <mat-button-toggle-group (change)="onChange($event)">
+          <mat-button-toggle [checked]="!status" class="mat-button-base" value="ALL">ALL</mat-button-toggle>
+          <mat-button-toggle [checked]="status == 'PENDING'" value="PENDING">PENDING</mat-button-toggle>
+          <mat-button-toggle [checked]="status == 'ACCEPTED'" value="ACCEPTED">ACCEPTED</mat-button-toggle>
+          <mat-button-toggle [checked]="status == 'RELOCATING'" value="RELOCATING">RELOCATING</mat-button-toggle>
+          <mat-button-toggle [checked]="status == 'REFUSED'" value="REFUSED">REFUSED</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+
+    <div>
+      <div *ngIf="loading; else dataTable">
+        <mat-spinner></mat-spinner>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #dataTable>
+  <h2>Requêtes futures</h2>
+
+  <div class="table-holder">
+    <table mat-table *ngIf="requests" matSort (matSortChange)="announceSortChange($event)" [dataSource]="dataSource">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by id"> id </th>
+        <td mat-cell *matCellDef="let req">{{req.id}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="begin">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by begin"> begins at </th>
+        <td mat-cell *matCellDef="let req">{{req.begin | date: "dd/MM/yy HH:mm"}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="end">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by end"> ends at </th>
+        <td mat-cell *matCellDef="let req">{{req.end | date: "dd/MM/yy HH:mm"}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="currentStatus">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by currentStatus"> currentStatus </th>
+        <td mat-cell *matCellDef="let req">{{req.currentStatus}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="neededCapacity">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by neededCapacity"> neededCapacity </th>
+        <td mat-cell *matCellDef="let req">{{req.neededCapacity}}</td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="materials">
+        <th mat-header-cell *matHeaderCellDef> materials </th>
+
+        <td mat-cell *matCellDef="let req">
+          {{req.materials.length}} materials
+          <app-materials-menu [materials]="req.materials" [disabled]="req.materials.length === 0"></app-materials-menu>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> actions </th>
+        <td mat-cell *matCellDef="let req">
+          <app-actions-btn [request]="req"></app-actions-btn>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                   showFirstLastButtons
+                   aria-label="Select page of periodic elements">
+    </mat-paginator>
+  </div>
+</ng-template>
+

@@ -1,0 +1,9 @@
+.accept {
+  color: white;
+  background-color: green;
+}
+
+.accept:disabled {
+  color: green;
+  background-color: grey;
+}

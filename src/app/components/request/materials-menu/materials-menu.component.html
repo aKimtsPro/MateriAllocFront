@@ -1,0 +1,16 @@
+<ng-container *ngIf="disabled; else menuActivation">
+  <button mat-flat-button color="accent" [disabled]="true">
+    <mat-icon>search</mat-icon>
+  </button>
+</ng-container>
+
+
+<ng-template #menuActivation>
+  <button mat-flat-button [matMenuTriggerFor]="menu" color="accent" [disabled]="false">
+    <mat-icon>search</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item *ngFor="let mat of materials">{{mat.name}}</button>
+  </mat-menu>
+</ng-template>
+

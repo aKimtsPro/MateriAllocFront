@@ -1,0 +1,30 @@
+.mat-form-field {
+  width: 100%;
+}
+
+.add-select-card {
+  margin-bottom: 15px;
+}
+
+.add-select {
+  display: flex;
+  margin-top: 20px;
+}
+
+.add-select-input {
+  width: 80%;
+}
+
+.add-select-btn button {
+  height: 52px;
+  background-color: #2d303c;
+  color: white;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.material-name {
+  line-height: 100%;
+  font-size: 20px;
+  margin-top: 10px;
+}

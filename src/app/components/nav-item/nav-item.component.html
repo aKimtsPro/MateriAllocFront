@@ -1,0 +1,12 @@
+<div  class="nav-item">
+    <button mat-icon-button *ngIf="navItem.children" (click)="expand()">
+      <mat-icon> {{ opened ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}} </mat-icon>
+    </button>
+    <p [routerLink]="navItem.url">{{ navItem.name }}</p>
+</div>
+
+<div class="nav-children">
+  <ng-container *ngIf="opened">
+    <app-nav-item *ngFor="let item of navItem.children" [item]="item"></app-nav-item>
+  </ng-container>
+</div>

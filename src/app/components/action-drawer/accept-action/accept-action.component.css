@@ -1,0 +1,41 @@
+.field-container {
+  margin-right: 10px;
+}
+
+.field-display {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.field-display p {
+  margin: 0;
+  text-align: center;
+}
+
+#material-field {
+  display: flex;
+}
+
+.selected {
+  background-color: #85ab85;
+}
+
+.select-btn {
+  width: 100%;
+}
+
+
+
+.accept {
+  color: white;
+  background-color: green;
+}
+
+.accept:disabled {
+  color: green;
+  background-color: grey;
+}
+
+
+

@@ -1,0 +1,24 @@
+.nav-item {
+  width: 100%;
+  display: flex;
+  font-size: 21px;
+  border-bottom: 1px solid #414141;
+  border-left: 1px solid #414141;
+  padding: 5px;
+  background-color: #2d303c;
+  color: white;
+}
+
+.nav-item:hover {
+  background-color: #cdd0dc;
+  color: #2d303c;
+}
+
+.nav-item p {
+  margin: 10px 0 0 10px;
+  height: 30px;
+}
+
+.nav-children{
+  padding-left: 10px;
+}
