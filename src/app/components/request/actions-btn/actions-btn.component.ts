@@ -42,7 +42,13 @@ export class ActionsBtnComponent implements OnInit {
   }
 
   accept(){
-    this._actionService.openComponent(new Action(AcceptActionComponent, {request: this.request}));
+    this._actionService.openComponent(
+      new Action(
+        AcceptActionComponent,
+        {request: this.request},
+        true
+      )
+    );
   }
 
   refuse(){
@@ -52,7 +58,8 @@ export class ActionsBtnComponent implements OnInit {
         {
           action: "refuse",
           request: this.request
-        }
+        },
+        true
       )
     )
   }
@@ -64,7 +71,9 @@ export class ActionsBtnComponent implements OnInit {
         {
           action: "relocate",
           request: this.request
-        })
+        },
+        true
+      )
     );
   }
 

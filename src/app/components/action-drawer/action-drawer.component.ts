@@ -1,7 +1,6 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatDrawer} from "@angular/material/sidenav";
 import {ActionHostDirective} from "./action-host/action-host.directive";
-import {NavItemComponent} from "../nav-item/nav-item.component";
 import {Action, ActionService} from "./action.service";
 import {Subscription} from "rxjs";
 
@@ -32,20 +31,15 @@ export class ActionDrawerComponent implements OnInit, OnDestroy {
   }
 
 
-
   loadComponent(action: Action){
     this.drawer.open();
-    const viewContainer = this.host.viewContainerRef;
-    viewContainer.clear();
-    const viewComponent = viewContainer.createComponent(action.component);
-    viewComponent.instance.data = action.data;
-    viewComponent.instance.drawer = this.drawer;
+    this.host.loadComponent(action, this.drawer)
   }
 
   clear(){
     this.drawer.close();
-    const viewContainer = this.host.viewContainerRef;
-    viewContainer.clear();
+    this.host.clear();
   }
+
 
 }

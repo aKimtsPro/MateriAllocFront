@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-accept-action',
   templateUrl: './accept-action.component.html',
-  styleUrls: ['./accept-action.component.css']
+  styleUrls: ['./accept-action.component.css', '../action.css']
 })
 export class AcceptActionComponent implements ActionComponent, OnInit {
 
@@ -53,9 +53,6 @@ export class AcceptActionComponent implements ActionComponent, OnInit {
     }
   }
 
-  relocate(){
-
-  }
 
 
 }

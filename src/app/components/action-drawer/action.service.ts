@@ -4,8 +4,23 @@ import {BehaviorSubject, Subject} from "rxjs";
 
 export class Action {
 
-  constructor(public component: Type<ActionComponent>, public data: any) {}
+  constructor(
+    private readonly _component: Type<ActionComponent>,
+    private readonly _data: any,
+    private readonly _changeSame?: boolean
+  ) {}
 
+  get component(): Type<ActionComponent> {
+    return this._component;
+  }
+
+  get data(): any {
+    return this._data;
+  }
+
+  get changeSame(): boolean | undefined {
+    return this._changeSame;
+  }
 }
 
 @Injectable()

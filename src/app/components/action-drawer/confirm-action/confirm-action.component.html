@@ -1,9 +1,11 @@
-<h3>Action: {{action}}</h3>
+<div class="action-title">
+  <h2>Justify {{action}}</h2>
+</div>
 
 <div>
   <mat-form-field appearance="fill">
     <mat-label>Justification</mat-label>
-    <input matInput [(ngModel)]="justification">
+    <textarea matInput [(ngModel)]="justification" rows="10"></textarea>
   </mat-form-field>
 </div>
 

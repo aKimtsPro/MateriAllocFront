@@ -13,7 +13,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatSidenavModule} from "@angular/material/sidenav";
-import { NavItemComponent } from '../components/nav-item/nav-item.component';
 import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
@@ -21,7 +20,6 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatListModule} from "@angular/material/list";
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {NgxMaterialTimepickerModule} from "ngx-material-timepicker";
 
 
 
@@ -47,8 +45,7 @@ import {NgxMaterialTimepickerModule} from "ngx-material-timepicker";
     MatMenuModule,
     MatExpansionModule,
     MatListModule,
-    MatDatepickerModule,
-    NgxMaterialTimepickerModule
+    MatDatepickerModule
   ],
   exports: [
     MatToolbarModule,
@@ -69,8 +66,7 @@ import {NgxMaterialTimepickerModule} from "ngx-material-timepicker";
     MatMenuModule,
     MatExpansionModule,
     MatListModule,
-    MatDatepickerModule,
-    NgxMaterialTimepickerModule
+    MatDatepickerModule
   ]
 })
 export class SharedModule { }

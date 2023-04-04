@@ -1,13 +1,13 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button (click)="drawer.toggle()">
-    <mat-icon>{{ drawer.opened ? 'close' : 'menu'}}</mat-icon>
+  <button mat-icon-button (click)="navDrawer.toggle()">
+    <mat-icon>{{ navDrawer.opened ? 'close' : 'menu'}}</mat-icon>
   </button>
   <span>MateriAlloc</span>
 </mat-toolbar>
 
 <mat-drawer-container class="container">
-  <mat-drawer #drawer class="sidenav" mode="push">
-    <app-nav-item *ngFor="let item of navItems" [item]="item"></app-nav-item>
+  <mat-drawer #navDrawer class="sidenav" mode="push">
+    <app-nav [navDrawer]="navDrawer"></app-nav>
   </mat-drawer>
 
   <mat-drawer #actionDrawer class="sideaction" mode="push" position="end">

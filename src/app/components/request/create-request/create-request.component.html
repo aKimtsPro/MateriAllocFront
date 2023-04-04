@@ -1,8 +1,14 @@
-<h2>Create request</h2>
 
-<mat-card *ngIf="error" class="error-card">
-  <mat-card-content>{{error | json}}</mat-card-content>
-</mat-card>
+<div class="action-title">
+  <h2>Create request</h2>
+</div>
+
+<div class="action-error" *ngIf="error">
+  <mat-card *ngIf="error" class="error-card">
+    <mat-card-content>{{error.message}}</mat-card-content>
+  </mat-card>
+</div>
+
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
@@ -31,15 +37,15 @@
     </mat-form-field>
   </div>
 
-  <div class="add-select-card" *ngIf="materials">
+  <div class="form-card" *ngIf="materials">
     <mat-card>
       <mat-card-header>
         <mat-card-title>Materials</mat-card-title>
       </mat-card-header>
+      <mat-divider></mat-divider>
       <mat-card-content>
         <div>
           <mat-list>
-            <mat-divider></mat-divider>
             <div *ngFor="let id of form.get('materialIds')?.value; let i=index">
                 <mat-list-item>
                   <div class="space-end">
@@ -77,23 +83,45 @@
     </mat-card>
   </div>
 
-  <div>
-    <mat-form-field appearance="fill">
-      <mat-label>Date</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Enter date">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-      <mat-error *ngIf="form.controls['date'].hasError('daysInFuture')">Date must be at least 3 days in the future</mat-error>
-    </mat-form-field>
+  <div class="form-card">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Time</mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Enter date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="form.controls['date'].hasError('daysInFuture')">Date must be at least 3 days in the future</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div id="time-fields">
+          <div>
+            <mat-form-field appearance="fill">
+              <mat-label>Begin at</mat-label>
+              <input type="time" matInput formControlName="beginAt">
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="fill">
+              <mat-label>end at</mat-label>
+              <input type="time" matInput formControlName="endAt">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <mat-card-footer>
+          <p class="app-global-invalid" *ngIf="form.hasError('dateABeforeB')">begin time should be after end time</p>
+        </mat-card-footer>
+
+      </mat-card-content>
+    </mat-card>
   </div>
-
-  <div>
-      <div class="mat-form-field-flex ng-tns-c103-2">
-        <ngx-timepicker-field [format]="24" [defaultTime]="'23:11'"></ngx-timepicker-field>
-      </div>
-
-  </div>
-
 
   <div>
     <mat-form-field appearance="fill">
@@ -102,8 +130,10 @@
     </mat-form-field>
   </div>
 
-
-
-  <button mat-raised-button color="primary" type="submit">Submit</button>
-
+  <div class="action-btn-rack row-btn">
+    <button mat-flat-button class="accept" type="submit" [disabled]="!form.valid">submit</button>
+    <button mat-flat-button color="warn" type="button" (click)="drawer.close()">cancel</button>
+  </div>
 </form>
+
+

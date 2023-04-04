@@ -52,3 +52,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   justify-content: space-between;
   width: 100%;
 }
+
+mat-card-content {
+  padding: 10px
+}
+
+.app-global-invalid {
+  color: red;
+}

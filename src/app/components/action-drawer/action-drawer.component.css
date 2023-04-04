@@ -1,4 +1,18 @@
 .action-container{
   height: calc(100% - 36px);
-  overflow-y: hidden;
+  overflow-y: scroll;
+  width: 50vw;
+  background-color: transparent;
+}
+
+@media screen and (max-width: 750px) {
+  .action-container{
+    width: 75vw;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .action-container{
+    width: 100vw;
+  }
 }

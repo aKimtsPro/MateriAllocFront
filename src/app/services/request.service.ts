@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {ReducedRequestDTO} from "../models/request.model";
+import {ReducedRequestDTO, RequestStatus} from "../models/request.model";
 import {RoomDTO} from "../models/room.model";
 import {RequestForm} from "../forms/request.form";
+import {BehaviorSubject, Observable, switchMap, tap} from "rxjs";
 
 
 interface StatusChangeForm {
@@ -21,8 +22,16 @@ export class RequestService {
 
   private readonly BASE_URL = "http://localhost:8080/api/request";
 
+  private readonly _reloaderSubject = new BehaviorSubject<undefined>(undefined)
+
   constructor(private readonly _client: HttpClient) { }
 
+  $reloader(status?: RequestStatus | string){
+    return this._reloaderSubject.asObservable()
+      .pipe(
+        switchMap(() => this.get(status))
+      );
+  }
 
   get(status?: string){
     let params = new HttpParams();
@@ -59,7 +68,10 @@ export class RequestService {
   }
 
   createRequest(form: RequestForm){
-    return this._client.post<never>(`${this.BASE_URL}/create`, form)
+    return this._client.post<never>(`${this.BASE_URL}/new`, form)
+      .pipe(
+        tap( () => this._reloaderSubject.next( undefined ) )
+      )
   }
 
 }

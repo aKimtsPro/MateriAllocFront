@@ -1,0 +1,24 @@
+.action-txt {
+}
+
+.action-title {
+  padding: 5px;
+  text-align: center;
+
+}
+
+.action-msg {
+  text-align: center;
+}
+
+
+.action-error{
+  padding: 10px;
+  background-color: rgba(253, 0, 0, 1);
+  box-shadow: inset 0 0 5px black;
+}
+
+.error-card {
+  box-shadow: 0 0 5px black;
+  color: red;
+}

@@ -1,22 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {daysInFuture, REQUEST_FORM, REQUEST_FORM_OPTIONS} from "../../../forms/request.form";
-import {MaterialDTO} from "../../../models/request.model";
-import {RequestService} from "../../../services/request.service";
-import {MaterialsService} from "../../../services/materials.service";
-import {Router} from "@angular/router";
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { daysInFuture, REQUEST_FORM_OPTIONS } from "src/app/forms/request.form";
+import { MaterialDTO } from "src/app/models/request.model";
+import { RequestService } from "src/app/services/request.service";
+import { MaterialsService } from "src/app/services/materials.service";
+import { Router } from "@angular/router";
+import {ActionComponent} from "../../action-drawer/action.component";
+import {MatDrawer} from "@angular/material/sidenav";
 
 @Component({
   selector: 'app-create-request',
   templateUrl: './create-request.component.html',
-  styleUrls: ['./create-request.component.css']
+  styleUrls: ['./create-request.component.css', '../../action-drawer/action.css']
 })
-export class CreateRequestComponent implements OnInit {
+export class CreateRequestComponent implements OnInit, ActionComponent {
 
   form: FormGroup;
   materials!: MaterialDTO[]
   selectedMat: MaterialDTO[] = [];
   error: any;
+  data: any;
+  drawer!: MatDrawer;
 
 
   constructor(
@@ -30,11 +34,11 @@ export class CreateRequestComponent implements OnInit {
       justification: [, [Validators.required]],
       neededCapacity: [, [Validators.required, Validators.min(5)]],
       date: [, daysInFuture(3)],
-      beginAt: [],
-      endAt: [],
+      beginAt: ["09:00"],
+      endAt: ["18:00"],
       materialIds: builder.array<number>([]),
       additionalNotes: []
-    },REQUEST_FORM_OPTIONS)
+    }, REQUEST_FORM_OPTIONS)
   }
 
   ngOnInit(): void {
@@ -42,7 +46,7 @@ export class CreateRequestComponent implements OnInit {
   }
   onSubmit(){
     console.log(this.form)
-    if(this.form.valid)
+    // if(this.form.valid)
       this._reqService.createRequest(this.form.value).subscribe({
         next: () => this._router.navigate(["request", "pending"]),
         error: err => this.error = err
@@ -67,5 +71,7 @@ export class CreateRequestComponent implements OnInit {
     (<FormArray>this.form.get("materialIds")).removeAt(index);
     this.selectedMat.splice(index, 1);
   }
+
+
 
 }

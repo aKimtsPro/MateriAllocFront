@@ -2,7 +2,7 @@ import {
   AbstractControl,
   AbstractControlOptions,
   FormArray,
-  FormControl,
+  FormControl, FormGroup,
   ValidationErrors,
   Validators
 } from "@angular/forms";
@@ -30,7 +30,7 @@ export const REQUEST_FORM = {
 }
 
 export const REQUEST_FORM_OPTIONS: AbstractControlOptions = {
-  validators: [dateABeforeB('beginsAt', 'endAt')]
+  validators: [dateABeforeB('beginAt', 'endAt')]
 }
 
 export function daysInFuture(days: number){
@@ -44,9 +44,36 @@ export function daysInFuture(days: number){
 
 export function dateABeforeB(formControlNameA: string, formControlNameB: string){
   return (control: AbstractControl): ValidationErrors | null => {
-    const dateA = new Date(new Date().toDateString() + control.value[formControlNameA])
-    const dateB = new Date(new Date().toDateString() + control.value[formControlNameB])
+    const form = <FormGroup>control;
 
-    return dateA < dateB ? null : { 'dateABeforeB': formControlNameA + " should be before " + formControlNameB }
+    const dateA = form.get(formControlNameA)?.value;
+    const dateB = form.get(formControlNameB)?.value;
+
+    if( !dateA || !dateB )
+      return null;
+
+    const error = dateA < dateB ? null : { dateABeforeB: `${formControlNameA} should be before ${formControlNameB}`};
+    if( error ){
+      form.controls[formControlNameA].setErrors({...form?.controls?.[formControlNameA].errors,...error})
+      form.controls[formControlNameB].setErrors({...form?.controls?.[formControlNameB].errors,...error})
+    }
+    else {
+      delete form.controls[formControlNameA].errors?.['dateABeforeB'];
+      delete form.controls[formControlNameB].errors?.['dateABeforeB'];
+      if( !hasProps(form.controls[formControlNameA].errors)  )
+        form.controls[formControlNameA].setErrors(null);
+      if( !hasProps(form.controls[formControlNameB].errors)  )
+        form.controls[formControlNameB].setErrors(null);
+    }
+
+    return error;
   }
 }
+
+function hasProps(obj: any){
+  if(!obj)
+    return false;
+
+  return Object.keys(obj).length > 0;
+}
+

@@ -10,7 +10,7 @@ import {Request} from "../../../models/request.model";
 @Component({
   selector: 'app-confirm-action',
   templateUrl: './confirm-action.component.html',
-  styleUrls: ['./confirm-action.component.css']
+  styleUrls: ['./confirm-action.component.css', '../action.css']
 })
 export class ConfirmActionComponent implements ActionComponent, OnInit {
 

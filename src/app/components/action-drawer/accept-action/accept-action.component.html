@@ -1,4 +1,9 @@
-<div>
+
+<div class="action-title">
+  <h2>Choose a room</h2>
+</div>
+
+<div *ngIf="compatibleRooms && compatibleRooms.length > 0; else noRooms">
   <mat-accordion>
     <mat-expansion-panel hideToggle *ngFor="let room of compatibleRooms" [ngClass]="{ selected: selectedRoom === room }">
       <mat-expansion-panel-header>
@@ -79,5 +84,13 @@
 </div>
 
 
+
+<ng-template #noRooms>
+
+  <div class="action-msg">
+    <p>No rooms availables</p>
+  </div>
+
+</ng-template>
 
 

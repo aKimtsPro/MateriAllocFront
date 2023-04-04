@@ -2,7 +2,7 @@
   width: 100%;
 }
 
-.add-select-card {
+.form-card {
   margin-bottom: 15px;
 }
 
@@ -28,3 +28,17 @@
   font-size: 20px;
   margin-top: 10px;
 }
+
+#time-fields {
+  display: flex;
+}
+
+#time-fields > div {
+  width: 100%;
+}
+
+mat-card-footer {
+  text-align: center;
+}
+
+

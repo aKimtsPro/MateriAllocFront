@@ -7,3 +7,7 @@
   color: green;
   background-color: grey;
 }
+
+mat-form-field {
+  width: 100%;
+}
