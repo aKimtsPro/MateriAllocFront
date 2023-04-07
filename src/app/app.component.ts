@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {NavItem} from "./components/nav/nav-item/nav-item.model";
+import {AuthService} from "./services/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,7 @@ import {NavItem} from "./components/nav/nav-item/nav-item.model";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'materialloc-fe';
-  showFiller = false;
+
+  constructor(readonly authService: AuthService) {}
 
 }

@@ -3,11 +3,13 @@ import {RouterModule, Routes} from "@angular/router";
 import {HomeComponent} from "./components/home/home.component";
 import {RequestComponent} from "./components/request/request.component";
 import {CreateRequestComponent} from "./components/request/create-request/create-request.component";
-import {LoggedIn2Guard, LoggedInGuard} from "./guards/logged-in.guard";
+import {LOGGED_GUARD, LoggedInGuard, NOT_LOGGED_GUARD} from "./guards/logged-in.guard";
+import {LoginComponent} from "./components/login/login.component";
 
 export const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
   { path: "home", component: HomeComponent },
+  { path: "login", component: LoginComponent, canActivate: [NOT_LOGGED_GUARD] },
   {
     path: "request",
     children: [
@@ -18,7 +20,7 @@ export const routes: Routes = [
       { path: "relocating", component: RequestComponent, data: { status: "RELOCATING" } },
       { path: "create", component: CreateRequestComponent },
     ],
-    canActivate: [ LoggedIn2Guard ]
+    canActivate: [ LOGGED_GUARD ]
   }
 ]
 

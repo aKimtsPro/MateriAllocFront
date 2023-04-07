@@ -1,9 +1,4 @@
-<mat-toolbar color="primary">
-  <button mat-icon-button (click)="navDrawer.toggle()">
-    <mat-icon>{{ navDrawer.opened ? 'close' : 'menu'}}</mat-icon>
-  </button>
-  <span>MateriAlloc</span>
-</mat-toolbar>
+<app-header [navDrawer]="navDrawer"></app-header>
 
 <mat-drawer-container class="container">
   <mat-drawer #navDrawer class="sidenav" mode="push">

@@ -6,6 +6,7 @@
   height: calc(100vh - 64px);
 }
 
+
 @media screen and (max-width: 598px) {
   .container {
     height: calc(100vh - 56px);

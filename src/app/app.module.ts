@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {ErrorHandler, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -22,6 +22,11 @@ import { CreateRequestComponent } from './components/request/create-request/crea
 import { MatNativeDateModule} from "@angular/material/core";
 import { NavComponent } from './components/nav/nav.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { HeaderComponent } from './components/header/header.component';
+import {GlobalErrorHandlerService} from "./services/global-error-handler.service";
+import {AuthService} from "./services/auth.service";
 
 @NgModule({
   declarations: [
@@ -36,7 +41,10 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
     AcceptActionComponent,
     ConfirmActionComponent,
     CreateRequestComponent,
-    NavComponent
+    NavComponent,
+    LoginComponent,
+    RegisterComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +59,9 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
   ],
   providers: [
     ActionService,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    {provide: ErrorHandler, useClass: GlobalErrorHandlerService}
   ],
   bootstrap: [ AppComponent ]
 })

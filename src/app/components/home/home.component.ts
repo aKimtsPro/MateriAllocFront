@@ -9,20 +9,11 @@ import {AuthService} from "../../services/auth.service";
 })
 export class HomeComponent implements OnInit {
 
-  form: FormGroup;
 
-  constructor(builder: FormBuilder, private readonly _authService: AuthService) {
-    this.form = builder.group({
-      username: [],
-      password: []
-    })
+  constructor() {
   }
 
   ngOnInit(): void {
-  }
-
-  connect(){
-    this._authService.login( this.form.value ).subscribe();
   }
 
 }

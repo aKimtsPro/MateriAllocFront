@@ -18,21 +18,31 @@ export class LoggedInGuard implements CanActivate {
   constructor( private readonly _authService: AuthService, private readonly _router: Router) {}
 
   canActivate(): boolean {
-    if( !this._authService.isConnected )
+    if( !this._authService.connected )
       this._router.navigateByUrl("/home")
 
-    return this._authService.isConnected;
+    return this._authService.connected;
   }
 
 }
 
 
-export const LoggedIn2Guard: CanActivateFn = function () {
+export const LOGGED_GUARD: CanActivateFn = function () {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  if( !authService.isConnected )
+  if( !authService.connected )
+    router.navigateByUrl("/login");
+
+  return authService.connected;
+}
+
+export const NOT_LOGGED_GUARD: CanActivateFn =function () {
+  const authService = inject(AuthService);
+  const router = inject(Router);
+
+  if( authService.connected )
     router.navigateByUrl("/home");
 
-  return authService.isConnected;
+  return !authService.connected;
 }

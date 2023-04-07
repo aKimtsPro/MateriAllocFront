@@ -1,0 +1,22 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="navDrawer.toggle()">
+    <mat-icon>{{ navDrawer.opened ? 'close' : 'menu'}}</mat-icon>
+  </button>
+  <span>MateriAlloc</span>
+  <span class="spacer"></span>
+  <div *ngIf="!(authService.connected$ | async); else logoutBtn">
+    <button mat-raised-button color="accent" class="nav-auth-btn" routerLink="/login">
+      login
+    </button>
+    <button mat-raised-button color="accent" class="nav-auth-btn" (click)="noImpl()">
+      register
+    </button>
+  </div>
+  <ng-template #logoutBtn>
+    <div>
+      <button mat-raised-button color="warn" (click)="authService.logout()" class="nav-auth-btn">
+        logout
+      </button>
+    </div>
+  </ng-template>
+</mat-toolbar>
