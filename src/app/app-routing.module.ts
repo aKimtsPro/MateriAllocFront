@@ -3,19 +3,22 @@ import {RouterModule, Routes} from "@angular/router";
 import {HomeComponent} from "./components/home/home.component";
 import {RequestComponent} from "./components/request/request.component";
 import {CreateRequestComponent} from "./components/request/create-request/create-request.component";
+import {LoggedIn2Guard, LoggedInGuard} from "./guards/logged-in.guard";
 
 export const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
   { path: "home", component: HomeComponent },
   {
-    path: "request", children: [
+    path: "request",
+    children: [
       { path: "", component: RequestComponent, pathMatch:"full" },
       { path: "pending", component: RequestComponent, data: { status: "PENDING" } },
       { path: "accepted", component: RequestComponent, data: { status: "ACCEPTED" } },
       { path: "refused", component: RequestComponent, data: { status: "REFUSED" } },
       { path: "relocating", component: RequestComponent, data: { status: "RELOCATING" } },
       { path: "create", component: CreateRequestComponent },
-    ]
+    ],
+    canActivate: [ LoggedIn2Guard ]
   }
 ]
 

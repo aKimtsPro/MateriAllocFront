@@ -8,7 +8,7 @@ import {NavItemComponent} from "./components/nav/nav-item/nav-item.component";
 import {AppRoutingModule} from "./app-routing.module";
 import { RequestComponent } from './components/request/request.component';
 import { HomeComponent } from './components/home/home.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import { ActionsBtnComponent } from './components/request/actions-btn/actions-btn.component';
 import { MaterialsMenuComponent } from './components/request/materials-menu/materials-menu.component';
@@ -21,6 +21,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { CreateRequestComponent } from './components/request/create-request/create-request.component';
 import { MatNativeDateModule} from "@angular/material/core";
 import { NavComponent } from './components/nav/nav.component';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,10 @@ import { NavComponent } from './components/nav/nav.component';
     ReactiveFormsModule,
     MatNativeDateModule
   ],
-  providers: [ ActionService ],
+  providers: [
+    ActionService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
